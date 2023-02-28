@@ -1,0 +1,43 @@
+version: '3.8'
+#containers => services
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - 3308:3306
+    volumes:
+      - mysql-springboot-data:/var/lib/mysql
+      - mysql-springboot-config-deamond:/etc/mysql/conf.d
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_NAME: root
+      MYSQL_NAME: mysql
+      MYSQL_ROOT_PASSWORD: 123
+  #      MYSQL_DATABASE: ols?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
+  capstone-service:
+    #    image: vanthanh26/capstone-service:lastest
+    image: vanthanh26/aws-tss-service:v1.0.0
+    #    restart: always
+    container_name: capstone-service
+    ports:
+      - 8888:8083
+    volumes:
+      - ./:/app
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_NAME: root
+      MYSQL_NAME: mysql
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: ols
+      HIBERNATE_DDL: update
+      MYSQL_PORT: 3306
+#create network
+networks:
+  backend:
+    name: capstone-network
+volumes:
+  mysql-springboot-data:
+  mysql-springboot-config-deamond:

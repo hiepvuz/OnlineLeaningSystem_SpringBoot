@@ -1,0 +1,136 @@
+-- CREATE TABLE `class_user` (
+--   `note` varchar(255) DEFAULT NULL,
+--   `status` varchar(255) DEFAULT NULL,
+--   `user_user_id` bigint NOT NULL,
+--   `classroom_class_id` bigint NOT NULL,
+--   PRIMARY KEY (`classroom_class_id`,`user_user_id`),
+--   KEY `FKqay591xe8hegjwwqi6e4n5667` (`user_user_id`),
+--   CONSTRAINT `FK5qs69jqvylb10a29vn8pgggnl` FOREIGN KEY (`classroom_class_id`) REFERENCES `classroom` (`class_id`),
+--   CONSTRAINT `FKqay591xe8hegjwwqi6e4n5667` FOREIGN KEY (`user_user_id`) REFERENCES `users` (`user_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `classroom` (
+--   `class_id` bigint NOT NULL,
+--   `class_code` varchar(255) DEFAULT NULL,
+--   `description` varchar(255) DEFAULT NULL,
+--   `status` bit(1) DEFAULT NULL,
+--   `trainer_id` bigint DEFAULT NULL,
+--   `package_id` bigint NOT NULL,
+--   `subject_id` bigint NOT NULL,
+--   PRIMARY KEY (`class_id`),
+--   KEY `FKofb5sj9e72sg4grlitwu2w2hu` (`package_id`),
+--   KEY `FKiolxh9fx4qrckbo5eitaqduot` (`subject_id`),
+--   CONSTRAINT `FKiolxh9fx4qrckbo5eitaqduot` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`),
+--   CONSTRAINT `FKofb5sj9e72sg4grlitwu2w2hu` FOREIGN KEY (`package_id`) REFERENCES `package` (`package_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `combo` (
+--   `combo_id` bigint NOT NULL,
+--   PRIMARY KEY (`combo_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `combo_package` (
+--   `combo_combo_id` bigint NOT NULL,
+--   `pack_package_id` bigint NOT NULL,
+--   PRIMARY KEY (`combo_combo_id`,`pack_package_id`),
+--   KEY `FKanems4bmyw2tpg0weopiylnyx` (`pack_package_id`),
+--   CONSTRAINT `FKanems4bmyw2tpg0weopiylnyx` FOREIGN KEY (`pack_package_id`) REFERENCES `package` (`package_id`),
+--   CONSTRAINT `FKh0npslxs8co1v38adr40udnbk` FOREIGN KEY (`combo_combo_id`) REFERENCES `combo` (`combo_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `hibernate_sequence` (
+--   `next_val` bigint DEFAULT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `package` (
+--   `package_id` bigint NOT NULL,
+--   `description` varchar(255) DEFAULT NULL,
+--   `duration` varchar(255) DEFAULT NULL,
+--   `is_combo` bit(1) DEFAULT NULL,
+--   `subject_id` bigint DEFAULT NULL,
+--   `term_id` bigint DEFAULT NULL,
+--   `thumbnail_url` varchar(255) DEFAULT NULL,
+--   `title` varchar(255) DEFAULT NULL,
+--   PRIMARY KEY (`package_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `permission` (
+--   `all_data` bit(1) DEFAULT NULL,
+--   `can_add` bit(1) DEFAULT NULL,
+--   `can_delete` bit(1) DEFAULT NULL,
+--   `can_edit` bit(1) DEFAULT NULL,
+--   `roleId_setting_id` bigint NOT NULL,
+--   `screenId_screenId` bigint NOT NULL,
+--   PRIMARY KEY (`roleId_setting_id`,`screenId_screenId`),
+--   KEY `FKkpiyb0sgt9yjwxr7hu6w7skas` (`screenId_screenId`),
+--   CONSTRAINT `FKkpiyb0sgt9yjwxr7hu6w7skas` FOREIGN KEY (`screenId_screenId`) REFERENCES `screen` (`screenId`),
+--   CONSTRAINT `FKo10dgk3fumul6lx5xh1e9n4gb` FOREIGN KEY (`roleId_setting_id`) REFERENCES `setting` (`setting_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `screen` (
+--   `screenId` bigint NOT NULL,
+--   PRIMARY KEY (`screenId`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `setting` (
+--   `setting_id` bigint NOT NULL,
+--   `description` varchar(255) DEFAULT NULL,
+--   `display_order` varchar(255) DEFAULT NULL,
+--   `setting_title` varchar(255) DEFAULT NULL,
+--   `setting_value` varchar(255) DEFAULT NULL,
+--   `status` bit(1) DEFAULT NULL,
+--   `type_id` bigint DEFAULT NULL,
+--   PRIMARY KEY (`setting_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `subject` (
+--   `subject_id` bigint NOT NULL,
+--   `body` varchar(255) DEFAULT NULL,
+--   `category_id` bigint DEFAULT NULL,
+--   `expert_id` bigint DEFAULT NULL,
+--   `manager_id` bigint DEFAULT NULL,
+--   `status` bit(1) DEFAULT NULL,
+--   `subject_code` varchar(255) DEFAULT NULL,
+--   `subject_name` varchar(255) DEFAULT NULL,
+--   PRIMARY KEY (`subject_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `user_package` (
+--   `id` bigint NOT NULL,
+--   `from_date` datetime(6) DEFAULT NULL,
+--   `package_id` bigint NOT NULL,
+--   `user_id` bigint NOT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `FKjcwapl2htr7k7l485y29cinog` (`package_id`),
+--   KEY `FK23wrg2jabxivswndr07og5q0y` (`user_id`),
+--   CONSTRAINT `FK23wrg2jabxivswndr07og5q0y` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+--   CONSTRAINT `FKjcwapl2htr7k7l485y29cinog` FOREIGN KEY (`package_id`) REFERENCES `package` (`package_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `user_role` (
+--   `user_id` bigint NOT NULL,
+--   `role_id` bigint NOT NULL,
+--   PRIMARY KEY (`user_id`,`role_id`),
+--   KEY `FK1sc2g2ox9c5m3j7k2horvcsmy` (`role_id`),
+--   CONSTRAINT `FK1sc2g2ox9c5m3j7k2horvcsmy` FOREIGN KEY (`role_id`) REFERENCES `setting` (`setting_id`),
+--   CONSTRAINT `FKj345gk1bovqvfame88rcx7yyx` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- CREATE TABLE `users` (
+--   `user_id` bigint NOT NULL,
+--   `address` varchar(255) DEFAULT NULL,
+--   `avatar_url` varchar(255) DEFAULT NULL,
+--   `created_date` timestamp NULL DEFAULT NULL,
+--   `dateOfBirth` datetime(6) DEFAULT NULL,
+--   `disabled` bit(1) DEFAULT NULL,
+--   `email` varchar(255) DEFAULT NULL,
+--   `full_name` varchar(255) DEFAULT NULL,
+--   `gender` varchar(255) DEFAULT NULL,
+--   `password` varchar(255) DEFAULT NULL,
+--   `phone_number` varchar(255) DEFAULT NULL,
+--   `updated_date` timestamp NULL DEFAULT NULL,
+--   `username` varchar(255) NOT NULL,
+--   PRIMARY KEY (`user_id`),
+--   UNIQUE KEY `UK_r43af9ap4edm43mmtq01oddj6` (`username`),
+--   UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

@@ -1,0 +1,5 @@
+export MYSQL_HOST="3308"
+export MYSQL_NAME="mysql"
+export MYSQL_ROOT="root"
+export MYSQL_ROOT_PASSWORD="123"
+export HIBERNATE_DLL="update"
